@@ -52,7 +52,7 @@ function udpHandler(msg, source) {
 function generateList(){
     let output = [];
     musician.forEach((value, key, map) => {
-        output.push({...value, uid: key})
+        output.push({uid: key, instrument: value.instrument, activeSince: value.activeSince})
     });
     return output;
 }
@@ -71,12 +71,12 @@ server.listen(protocol.TCP_PORT, function() {
 server.on('connection', function(socket) {
     console.log('A new connection has been established.');
 
-    let output = [];
+    let output = generateList();
 
 
     // Now that a TCP connection has been established, the server can send data to
     // the client by writing to its socket.
-    socket.write('Hello, client.');
+    socket.write(JSON.stringify(output));
 
     // The server can also receive data from the client by reading from its socket.
     socket.on('data', function(chunk) {
@@ -101,7 +101,6 @@ setInterval(() =>{
             map.delete(key);
         }
     });
-    console.log(generateList())
 }, 5000)
 
 // TODO add tcp connection

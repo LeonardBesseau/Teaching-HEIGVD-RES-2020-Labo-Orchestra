@@ -4,8 +4,7 @@
  * Firstly, it must listen to Musicians and keep track of **active** musicians. A musician is active if it has
  * played a sound during the last 5 seconds.
  *
- * Secondly, it must make this information available to you.
- * Concretely, this means that it should implement a very simple TCP-based protocol
+ * Secondly, it must make this information available with a very simple TCP-based protocol
  *
  * @author Besseau Léonard
  * @author Ogi Nicolas

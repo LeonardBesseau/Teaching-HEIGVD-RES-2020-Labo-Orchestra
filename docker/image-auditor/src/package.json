@@ -1,0 +1,14 @@
+{
+  "name": "auditor",
+  "version": "1.0.0",
+  "description": "Simulates someone who listens to the orchestra.",
+  "main": "auditor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "RES"
+  ],
+  "author": "Besseau Leonard",
+  "license": "ISC"
+}

@@ -162,7 +162,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
 | | With `socket.addMembership(protocol.PROTOCOL_MULTICAST_ADDRESS);` on a binded socket.  |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | Technically an object is a dictionary (an associative array where properties are retrieved by a key). We can use a Map as a dictionary by using an unique properties (in our case the uuid) as the key and the rest of the data as value. |
+| | Technically an object is a dictionary (an associative array where properties are retrieved by a key). We can use a Map as a dictionary by using an unique properties (in our case the uuid) as the key and the rest of the data as value. Or just give it a 2-dimensional array.|
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
 | | By importing it (add it as a dependency). It can then be used to compute the difference between two dates. |
 |Question | When and how do we **get rid of inactive players**?  |

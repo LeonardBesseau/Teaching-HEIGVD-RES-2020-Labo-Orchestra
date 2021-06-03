@@ -13,45 +13,87 @@
 
 const protocol = require('./common/protocol');
 const dgram = require('dgram');
+const net = require('net');
 
 const socket = dgram.createSocket('udp4');
-const musician = new Map();
+const server = new net.Server();
+
 const sound = require('./instrumentBasedOnSound').sound
-console.log(sound)
+const musician = new Map();
 
 
 socket.bind(protocol.PROTOCOL_PORT, () => {
-    console.log("Listening");
+    console.log("UDP Multicast Started");
     socket.addMembership(protocol.PROTOCOL_MULTICAST_ADDRESS);
 });
 
 
-socket.on('message', function (msg, source) {
-    // TODO manage list
+function udpHandler(msg, source) {
     const input = JSON.parse(msg);
     if (!input.sound || !input.uid) {
         console.log("Invalid message received");
     } else {
         const instrument = sound.get(input.sound);
-        if (!instrument){
+        if (!instrument) {
             console.log("One musician is playing an unrecognised instrument.")
-        }else{
+        } else {
             let data = musician.get(input.uid);
-            if (data){
+            if (data) {
                 data.lastMessage = new Date();
-            }else{
-                data = {instrument: instrument, uid: input.uid, activeSince: new Date(), lastMessage:new Date()};
+            } else {
+                data = {instrument: instrument, activeSince: new Date(), lastMessage: new Date()};
             }
             musician.set(input.uid, data)
             console.log("Data has arrived:", msg.toString(), ". Source port:", source.port);
         }
     }
+}
 
+function generateList(){
+    let output = [];
+    musician.forEach((value, key, map) => {
+        output.push({...value, uid: key})
+    });
+    return output;
+}
+
+// UDP Management
+socket.on('message', function (msg, source) {
+    udpHandler(msg, source);
+});
+
+server.listen(protocol.TCP_PORT, function() {
+    console.log("Server listening for connection requests on socket localhost:", protocol.TCP_PORT);
+});
+
+// When a client requests a connection with the server, the server creates a new
+// socket dedicated to that client.
+server.on('connection', function(socket) {
+    console.log('A new connection has been established.');
+
+    let output = [];
+
+
+    // Now that a TCP connection has been established, the server can send data to
+    // the client by writing to its socket.
+    socket.write('Hello, client.');
+
+    // The server can also receive data from the client by reading from its socket.
+    socket.on('data', function(chunk) {
+        console.log("Data received from client: ",chunk.toString());
+    });
+
+    socket.on('end', function() {
+        console.log('Closing connection with the client');
+    });
+
+    socket.on('error', function(err) {
+        console.log("TCP Server error:", err);
+    });
 });
 
 
 setInterval(() =>{
-    console.log(musician)
     const time = Date.now()
     musician.forEach((value, key, map) => {
         const delta = Math.floor((time- value.lastMessage)/1000);
@@ -59,6 +101,7 @@ setInterval(() =>{
             map.delete(key);
         }
     });
+    console.log(generateList())
 }, 5000)
 
 // TODO add tcp connection

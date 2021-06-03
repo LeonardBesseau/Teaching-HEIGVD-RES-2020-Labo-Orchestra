@@ -160,15 +160,15 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | ---  |
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
-| | *Enter your response here...*  |
+| | With `socket.addMembership(protocol.PROTOCOL_MULTICAST_ADDRESS);` on a binded socket.  |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | *Enter your response here...* |
+| | Technically an object is a dictionary (an associative array where properties are retrieved by a key). We can use a Map as a dictionary by using an unique properties (in our case the uuid) as the key and the rest of the data as value. |
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
-| | *Enter your response here...* |
+| | By importing it (add it as a dependency). It can then be used to compute the difference between two dates. |
 |Question | When and how do we **get rid of inactive players**?  |
-| | *Enter your response here...* |
+| | By keeping a timestamp of the last time a message from this player was received and checking every five seconds to see if the last message received was in the interval (5 seconds before now) |
 |Question | How do I implement a **simple TCP server** in Node.js?  |
-| | *Enter your response here...* |
+| | With the package `net` which is a default package. We can create a server that listen on a port and define operation to apply when a TCP event occur (connection, end, etc.) |
 
 
 ## Task 5: package the "auditor" app in a Docker image

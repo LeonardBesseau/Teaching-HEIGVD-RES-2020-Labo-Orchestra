@@ -120,21 +120,21 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Enter your response here...*  |
+| | JSON.stringify(object);  |
 |Question | What is **npm**?  |
-| | *Enter your response here...*  |
+| | The packet manager for nodeJS  |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *Enter your response here...*  |
+| | Install a package or a list of package defined in `package.json`. The `--save` does not exist anymore and is no the default. It's use was to update the `package.json` with the dependency of the installed package. |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | We can search for packages that implement a functionality we would like to use.  |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | With the package [uuid](https://www.npmjs.com/package/uuid)  |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | `setInterval(intervalFunc, delay)`  |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | With the package `dgram` which is a default package. We emit a datagram this way: client.send(message, 0, message.length, 41234, "localhost"); where client is a socket created with dgram|
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | With `process.argv`  |
 
 
 ## Task 3: package the "musician" app in a Docker image

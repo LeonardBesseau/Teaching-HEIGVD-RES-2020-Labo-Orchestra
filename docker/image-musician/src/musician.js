@@ -18,7 +18,7 @@ function sendSound(sound) {
     const payload = JSON.stringify(output)
     const message = Buffer.from(payload);
     socket.send(message, 0, message.length, PROTOCOL.PROTOCOL_PORT, PROTOCOL.PROTOCOL_MULTICAST_ADDRESS, function (err, bytes) {
-        console.log("Sending payload:",payload,"via port",socket.address().port);
+        console.log("Sending payload:", payload, "via port", socket.address().port);
     });
 }
 
@@ -35,5 +35,5 @@ if (!sound) {
     console.log("Instrument ", instrument, " is not playable. Exiting")
     process.exit(9);
 }
-console.log("Musician",uid,"will now start playing",instrument,".")
+console.log("Musician", uid, "will now start playing", instrument, ".")
 setInterval(sendSound, 500, sound);

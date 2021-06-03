@@ -49,7 +49,7 @@ function udpHandler(msg, source) {
     }
 }
 
-function generateList(){
+function generateList() {
     let output = [];
     musician.forEach((value, key, map) => {
         output.push({uid: key, instrument: value.instrument, activeSince: value.activeSince})
@@ -62,13 +62,13 @@ socket.on('message', function (msg, source) {
     udpHandler(msg, source);
 });
 
-server.listen(protocol.TCP_PORT, function() {
+server.listen(protocol.TCP_PORT, function () {
     console.log("Server listening for connection requests on socket localhost:", protocol.TCP_PORT);
 });
 
 // When a client requests a connection with the server, the server creates a new
 // socket dedicated to that client.
-server.on('connection', function(socket) {
+server.on('connection', function (socket) {
     console.log('A new connection has been established.');
 
     let output = generateList();
@@ -79,31 +79,26 @@ server.on('connection', function(socket) {
     socket.write(JSON.stringify(output));
 
     // The server can also receive data from the client by reading from its socket.
-    socket.on('data', function(chunk) {
-        console.log("Data received from client: ",chunk.toString());
+    socket.on('data', function (chunk) {
+        console.log("Data received from client: ", chunk.toString());
     });
 
-    socket.on('end', function() {
+    socket.on('end', function () {
         console.log('Closing connection with the client');
     });
 
-    socket.on('error', function(err) {
+    socket.on('error', function (err) {
         console.log("TCP Server error:", err);
     });
 });
 
 
-setInterval(() =>{
+setInterval(() => {
     const time = Date.now()
     musician.forEach((value, key, map) => {
-        const delta = Math.floor((time- value.lastMessage)/1000);
-        if (delta >= 5){
+        const delta = Math.floor((time - value.lastMessage) / 1000);
+        if (delta >= 5) {
             map.delete(key);
         }
     });
 }, 5000)
-
-// TODO add tcp connection
-
-
-

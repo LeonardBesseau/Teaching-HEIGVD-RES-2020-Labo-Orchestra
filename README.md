@@ -110,9 +110,9 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
 | | The auditor. It will update it's list of active musicians accordingly. |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | The sound |
+| | The sound and an uuid to identify the musician. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | Sender: An array to know which sound correspond to which instrument and a constant to know which instrument to play.It won't be updated It will be query when playing a sound or at startup. For the sender an array/map of active musician. It will be updated each time a datagram is received and when a musician has not sent a sound for 5 second. It will be queried when a TCP request is donedr|
+| | - Sender: An array to know which sound correspond to which instrument and a constant to know which instrument to play. It won't be updated It will be query when playing a sound or at startup. <br />- Receiver:  An array/map of active musician. It will be updated each time a datagram is received and when a musician has not sent a sound for 5 second. It will be queried when a TCP request is donedr |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -120,7 +120,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | JSON.stringify(object);  |
+| | `JSON.stringify(object);` |
 |Question | What is **npm**?  |
 | | The packet manager for nodeJS  |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |

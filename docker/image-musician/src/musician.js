@@ -8,8 +8,8 @@
  * @author Ogi Nicolas
  */
 
-const PROTOCOL = require('../../common/protocol');
-const INSTRUMENT = require('../../common/instrument')
+const PROTOCOL = require('./common/protocol');
+const INSTRUMENT = require('./common/instrument')
 const {v4: uuidv4} = require('uuid');
 const dgram = require('dgram');
 

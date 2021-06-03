@@ -89,6 +89,7 @@ server.on('connection', function (socket) {
     socket.on('error', function (err) {
         console.log("TCP Server error:", err);
     });
+    socket.end()
 });
 
 
@@ -100,4 +101,4 @@ setInterval(() => {
             map.delete(key);
         }
     });
-}, 5000)
+}, 1000)

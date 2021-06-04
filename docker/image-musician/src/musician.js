@@ -9,7 +9,7 @@
  */
 
 const PROTOCOL = require('./common/protocol');
-const INSTRUMENT = require('./common/instrument')
+const INSTRUMENT = require('./common/instrument');
 const {v4: uuidv4} = require('uuid');
 const dgram = require('dgram');
 
@@ -29,6 +29,7 @@ if (process.argv.length < 3 || !process.argv[2]) {
     console.log("You need to define an instrument to play");
     process.exit(9);
 }
+
 const instrument = process.argv[2];
 const sound = INSTRUMENT[instrument];
 if (!sound) {

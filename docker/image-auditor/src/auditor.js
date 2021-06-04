@@ -77,15 +77,6 @@ server.on('connection', function (socket) {
     // the client by writing to its socket.
     socket.write(JSON.stringify(output));
 
-    // The server can also receive data from the client by reading from its socket.
-    socket.on('data', function (chunk) {
-        console.log("Data received from client: ", chunk.toString());
-    });
-
-    socket.on('end', function () {
-        console.log('Closing connection with the client');
-    });
-
     socket.on('error', function (err) {
         console.log("TCP Server error:", err);
     });
